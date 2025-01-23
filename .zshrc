@@ -1,13 +1,16 @@
 alias vim="nvim"
-alias nvimconfig="vim ~/.config/nvim"
 alias sz="source ~/.zshrc"
-alias zshrc="vim ~/.zshrc"
 alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
 alias media="cd /run/media/indiebreath"
 alias pe="EDITOR=nvim pass edit"
 alias reboot="umount ~/sambashare && reboot"
+
+alias nvimconfig="vim ~/.config/nvim"
+alias zshrc="vim ~/.zshrc"
+alias hyprconfig="vim ~/.config/hypr/hyprland.conf"
+alias waybarconfig="vim ~/.config/waybar"
 
 alias fileserver="ssh indiebreath@192.168.50.164"
 alias mainserver="ssh indiebreath@192.168.50.70"
@@ -44,7 +47,6 @@ alias schoolnotes="vim ~/Documents/School/Notes"
 alias libreoffice="~/scripts/libreofficewriter.sh"
 
 eval "$(zoxide init --cmd cd zsh)"
-eval "$(starship init zsh)"
 eval "$(thefuck --alias fk)"
 
 export EDITOR=nvim

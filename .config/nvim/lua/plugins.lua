@@ -84,10 +84,11 @@ return {
         "akinsho/toggleterm.nvim",
         config = function()
             require("toggleterm").setup({
-                open_mapping = [[<Leader>h]],
                 direction = "float",
                 shade_terminals = false,
             })
+
+            vim.keymap.set("n", "<Leader>h", ":ToggleTerm <cr>")
         end,
     },
 
