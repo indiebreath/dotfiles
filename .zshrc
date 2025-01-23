@@ -35,6 +35,9 @@ alias apacheconf="sudo nvim /etc/httpd/conf/httpd.conf"
 alias phpconf="sudo nvim /etc/php/php.ini"
 alias mariadbconf="sudo nvim /etc/my.cnf.d"
 
+alias clangdev="clang -std=c99 -Wall -Werror"
+alias clangbuild="clang -std=99"
+
 alias notes="vim ~/Documents/Notes"
 alias schoolnotes="vim ~/Documents/School/Notes"
 

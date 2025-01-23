@@ -74,7 +74,7 @@ return {
         keys = {
             {
                 "<C-n>",
-                "<cmd>Yazi cwd<cr>",
+                "<cmd>Yazi<cr>",
                 desc = "Open yazi in current working directory",
             },
         },
@@ -310,7 +310,14 @@ return {
             require("neodev").setup({
                 library = { plugins = { "nvim-dap-ui" }, types = true },
             })
-            require("dap-python").setup()
+            require("dap-python").setup("python")
+
+            dap.configurations.cpp = {
+                type = "executable",
+                command = "/usr/bin/lldb",
+                name = "lldb"
+            }
+            dap.configurations.c = dap.configurations.cpp
 
             vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint, {})
             vim.keymap.set("n", "<Leader>dc", dap.continue, {})
@@ -376,6 +383,19 @@ return {
             require("dashboard").setup {
                 theme = "hyper"
             }
+        end
+    },
+
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        dependencies = {
+            { "github/copilot.vim" },
+            { "nvim-lua/plenary.nvim" }
+        },
+        build = "make tiktoken",
+        config = function ()
+            require("CopilotChat").setup()
+            vim.keymap.set("n", "<Leader>ch", ":CopilotChatOpen <cr>")
         end
     },
 }
