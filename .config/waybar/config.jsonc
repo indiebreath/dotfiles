@@ -8,6 +8,7 @@
     // Choose the order of the modules
     "modules-left": [
         "cpu",
+        "temperature",
         "memory",
         "battery",
         "battery#bat2",
@@ -16,13 +17,11 @@
     "modules-center": [
         "clock",
         "hyprland/window",
-        "clock"
     ],
     "modules-right": [
         "idle_inhibitor",
         "pulseaudio",
         "power-profiles-daemon",
-        "temperature",
         "backlight",
         "bluetooth",
         "tray",
@@ -42,14 +41,16 @@
     "clock": {
         "timezone": "Australia/Melbourne",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": "{:%D %M %Y}"
     },
     "cpu": {
-        "format": "{usage}% ",
-        "tooltip": true
+        "interval": 1,
+        "format": "{icon0} {icon1} {icon2} {icon3} {icon4} {icon5} {icon6} {icon7} {usage}% ",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
     },
     "memory": {
-        "format": "{}% "
+        "interval": 1,
+        "format": "{used:0.1f} G / {total:0.1f} G "
     },
     "temperature": {
         // "thermal-zone": 2,

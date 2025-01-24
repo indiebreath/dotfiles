@@ -1,3 +1,19 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+unsetopt beep
+bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/indiebreath/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+zstyle ':completion:*' rehash true
+
 alias vim="nvim"
 alias sz="source ~/.zshrc"
 alias rm="rm -i"
@@ -5,7 +21,9 @@ alias mv="mv -i"
 alias cp="cp -i"
 alias media="cd /run/media/indiebreath"
 alias pe="EDITOR=nvim pass edit"
+
 alias reboot="umount ~/sambashare && reboot"
+alias poweroff="umount ~/sambashare && poweroff"
 
 alias nvimconfig="vim ~/.config/nvim"
 alias zshrc="vim ~/.zshrc"
@@ -48,6 +66,7 @@ alias libreoffice="~/scripts/libreofficewriter.sh"
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(thefuck --alias fk)"
+eval "$(starship init zsh)"
 
 export EDITOR=nvim
 export VISUAL=nvim
