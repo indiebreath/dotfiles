@@ -74,6 +74,7 @@ return {
         keys = {
             {
                 "<C-n>",
+                mode = { "n", "v" },
                 "<cmd>Yazi<cr>",
                 desc = "Open yazi in current working directory",
             },
