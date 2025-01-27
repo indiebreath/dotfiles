@@ -388,7 +388,7 @@ return {
         end
     },
 
-    {
+    --[[{
         "CopilotC-Nvim/CopilotChat.nvim",
         dependencies = {
             { "github/copilot.vim" },
@@ -399,5 +399,5 @@ return {
             require("CopilotChat").setup()
             vim.keymap.set("n", "<Leader>ch", ":CopilotChatOpen <cr>")
         end
-    },
+    },]]
 }
