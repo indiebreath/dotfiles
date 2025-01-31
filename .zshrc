@@ -44,6 +44,7 @@ alias yc="yay -Sc"
 alias yu="yay -Syu"
 alias yr="sudo pacman -Rs"
 alias pac="sudo pacman -S"
+alias ys="yay -S"
 
 alias npi="npm install"
 alias npu="npm uninstall"
