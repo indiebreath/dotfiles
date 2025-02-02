@@ -312,7 +312,7 @@ return {
             require("neodev").setup({
                 library = { plugins = { "nvim-dap-ui" }, types = true },
             })
-            require("dap-python").setup("python")
+            require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
 
             dap.configurations.cpp = {
                 type = "executable",
