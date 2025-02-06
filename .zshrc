@@ -10,6 +10,10 @@ zstyle :compinstall filename '/home/indiebreath/.zshrc'
 
 autoload -Uz compinit
 compinit
+
+autoload -Uz promptinit
+promptinit
+prompt elite2 magenta
 # End of lines added by compinstall
 
 zstyle ':completion:*' rehash true
@@ -67,7 +71,6 @@ alias libreoffice="~/scripts/libreofficewriter.sh"
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(thefuck --alias fk)"
-eval "$(starship init zsh)"
 
 export EDITOR=nvim
 export VISUAL=nvim
