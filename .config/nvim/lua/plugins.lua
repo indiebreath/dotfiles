@@ -40,7 +40,7 @@ return {
         config = function()
             local config = require("nvim-treesitter.configs")
             config.setup({
-                ensure_installed = { "lua", "python", "bash", "html", "javascript", "php", "markdown" },
+                ensure_installed = { "lua", "python", "bash", "html", "javascript", "php", "markdown", "java" },
                 highlight = { enable = true },
                 indent = { enable = true },
             })
@@ -102,11 +102,6 @@ return {
     },
 
     {
-        "mfussenegger/nvim-jdtls",
-        dependencies = { "mfussenegger/nvim-dap"}
-    },
-
-    {
         "williamboman/mason.nvim",
         opts = {
             registries = {
@@ -127,6 +122,7 @@ return {
                     "eslint",
                     "emmet_language_server",
                     "phpactor",
+                    "java_language_server"
                 },
             })
         end,
@@ -137,6 +133,7 @@ return {
         config = function()
             local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local util = require("lspconfig.util")
 
             lspconfig.lua_ls.setup({
                 capabilities = capabilities,
@@ -180,6 +177,9 @@ return {
                 },
             })
             lspconfig.phpactor.setup({
+                capabilities = capabilities,
+            })
+            lspconfig.jdtls.setup({
                 capabilities = capabilities,
             })
 

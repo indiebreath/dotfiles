@@ -142,6 +142,7 @@ button:hover {
 
 #idle_inhibitor {
     margin-right: 12px;
+    margin-left: 2px;
     color: #7cb342;
 }
 
