@@ -122,10 +122,14 @@ return {
                     "eslint",
                     "emmet_language_server",
                     "phpactor",
-                    "java_language_server"
+                    "java_language_server",
                 },
             })
         end,
+    },
+
+    {
+        "mfussenegger/nvim-jdtls",
     },
 
     {
@@ -133,7 +137,7 @@ return {
         config = function()
             local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local util = require("lspconfig.util")
+            local jdtls = require("jdtls")
 
             lspconfig.lua_ls.setup({
                 capabilities = capabilities,
@@ -181,10 +185,14 @@ return {
             })
             lspconfig.jdtls.setup({
                 capabilities = capabilities,
+                on_attach = function()
+                    vim.keymap.set("n", "<C-o>", jdtls.organize_imports, {})
+                end
             })
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+            vim.keymap.set({ "n", "v" }, "<Leader>rn", vim.lsp.buf.rename, {})
         end,
     },
 
@@ -212,6 +220,9 @@ return {
                         diagnostics_postprocess = function(diagnostic)
                             diagnostic.code = diagnostic.message_id
                         end,
+                    }),
+                    null_ls.builtins.diagnostics.checkstyle.with({
+                        extra_args = { "-c", "/google_checks.xml" },
                     }),
                     null_ls.builtins.diagnostics.stylelint,
                     null_ls.builtins.formatting.shfmt,
@@ -392,4 +403,20 @@ return {
             vim.keymap.set("n", "<Leader>ch", ":CopilotChatOpen <cr>")
         end
     },]]
+
+    {
+        "kdheepak/lazygit.nvim",
+        lazy = true,
+        cmd = {
+            "LazyGit",
+            "LazyGitConfig",
+            "LazyGitCurrentFile",
+            "LazyGitFilter",
+            "LazyGitFilterCurrentFile",
+        },
+        dependencies = { "nvim-lua/plenary.nvim" },
+        keys = {
+            { "<Leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+        },
+    },
 }

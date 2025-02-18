@@ -50,9 +50,12 @@ alias mariadbconf="sudo nvim /etc/my.cnf.d"
 
 alias clangdev="clang -std=c99 -Wall -Werror"
 alias clangbuild="clang -std=99"
+alias pybuild="pyinstaller -F"
 
 alias notes="vim ~/Documents/Notes"
 alias schoolnotes="vim ~/Documents/School/School_Notes"
+
+alias remotelogin="ssh indiebreath@100.123.79.46"
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(thefuck --alias fk)"
