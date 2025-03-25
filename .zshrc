@@ -55,7 +55,9 @@ alias pybuild="pyinstaller -F"
 alias notes="vim ~/Documents/Notes"
 alias schoolnotes="vim ~/Documents/School/School_Notes"
 
-alias remotelogin="ssh indiebreath@100.123.79.46"
+alias remotelogin="ssh indiebreath@100.68.21.58"
+
+alias umountvms="umount /run/media/indiebreath/VMs"
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(thefuck --alias fk)"
