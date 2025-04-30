@@ -81,7 +81,8 @@ return {
         "akinsho/toggleterm.nvim",
         config = function()
             require("toggleterm").setup({
-                direction = "float",
+                direction = "vertical",
+                size = vim.o.columns * 0.4,
                 shade_terminals = false,
             })
 
@@ -224,7 +225,6 @@ return {
                     null_ls.builtins.diagnostics.checkstyle.with({
                         extra_args = { "-c", "/google_checks.xml" },
                     }),
-                    null_ls.builtins.diagnostics.stylelint,
                     null_ls.builtins.diagnostics.semgrep,
                     null_ls.builtins.formatting.shfmt,
                     null_ls.builtins.formatting.black,
