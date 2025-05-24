@@ -5,7 +5,7 @@ vim.cmd("set shiftwidth=4")
 vim.g.mapleader = " "
 vim.cmd("set number")
 vim.cmd("set clipboard+=unnamedplus")
-vim.cmd("set mousemodel=")
+vim.cmd("set mouse=")
 vim.cmd("set linebreak")
 
 vim.keymap.set("n", "<C-h>", "<C-w><Left>", {})

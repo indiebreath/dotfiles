@@ -81,8 +81,7 @@ return {
         "akinsho/toggleterm.nvim",
         config = function()
             require("toggleterm").setup({
-                direction = "vertical",
-                size = vim.o.columns * 0.4,
+                direction = "float",
                 shade_terminals = false,
             })
 
@@ -114,19 +113,21 @@ return {
 
     {
         "williamboman/mason-lspconfig.nvim",
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "lua_ls",
-                    "pylsp",
-                    "bashls",
-                    "eslint",
-                    "emmet_language_server",
-                    "phpactor",
-                    "java_language_server",
-                },
-            })
-        end,
+        opts = {
+            automatic_enable = true,
+            ensure_installed = {
+                "lua_ls",
+                "pylsp",
+                "bashls",
+                "eslint",
+                "emmet_language_server",
+                "phpactor",
+                "java_language_server",
+            },
+        },
+        dependencies = {
+            "mason-org/mason.nvim", "neovim/nvim-lspconfig"
+        }
     },
 
     {

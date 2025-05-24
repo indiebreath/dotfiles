@@ -37,6 +37,8 @@ alias gc="git checkout"
 alias gcb="git checkout -b"
 alias gpl="git pull"
 
+alias lzg="lazygit"
+
 alias yc="yay -Sc"
 alias yu="yay -Syu"
 alias yr="sudo pacman -Rs"
