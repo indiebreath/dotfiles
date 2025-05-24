@@ -63,6 +63,7 @@ alias umountvms="umount /run/media/indiebreath/VMs"
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(thefuck --alias fk)"
+eval "$(starship init zsh)"
 
 export EDITOR=nvim
 export VISUAL=nvim
