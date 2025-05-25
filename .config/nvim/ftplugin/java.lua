@@ -1,9 +1,10 @@
 -- If you started neovim within `~/dev/xy/project-1` this would resolve to `project-1`
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
-local workspace_dir = '/path/to/workspace-root/' .. project_name
+local workspace_dir = '/home/indiebreath/Documents/Software/' .. project_name
 --                                               ^^
---
+--                                               string concattenation in Lua
+
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
     -- The command that starts the language server
@@ -25,22 +26,23 @@ local config = {
         '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
         -- 💀
-        '-jar', '/usr/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.7.0.v20250424-1814.jar',
+        '-jar',
+        "/home/indiebreath/packages/eclipse.jdt.ls-1.47.0/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.7.0.v20250519-0528.jar",
         -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
         -- Must point to the                                                     Change this to
         -- eclipse.jdt.ls installation                                           the actual version
 
 
         -- 💀
-        '-configuration', '/usr/share/java/jdtls/config_linux',
-        -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
+        '-configuration',
+        "/home/indiebreath/packages/eclipse.jdt.ls-1.47.0/org.eclipse.jdt.ls.product/target/repository/config_linux",                   -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
         -- Must point to the                      Change to one of `linux`, `win` or `mac`
         -- eclipse.jdt.ls installation            Depending on your system.
 
 
         -- 💀
         -- See `data directory configuration` section in the README
-        '-data', workspace_dir,
+        '-data', workspace_dir
     },
 
     -- 💀
@@ -69,6 +71,9 @@ local config = {
     init_options = {
         bundles = {}
     },
+    on_attach = function(client, bufnr)
+        local opts = { silent = true, buffer = bufnr }
+    end
 }
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.

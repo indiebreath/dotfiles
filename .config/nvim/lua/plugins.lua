@@ -22,16 +22,21 @@ return {
             vim.cmd("colorscheme github_dark")
         end,
     },]]
+
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.8",
-        required = { { "nvim-lua/plenary.nvim" } },
+        dependencies = { "nvim-lua/plenary.nvim", "BurntSushi/ripgrep", "sharkdp/fd" },
         config = function()
-            local builtin = require("telescope.builtin")
-            vim.keymap.set("n", "<C-p>", builtin.find_files, {})
-            vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+            require("telescope").setup {
+                extensions = {
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown {}
+                    }
+                }
+            }
+
             require("telescope").load_extension("ui-select")
-        end,
+        end
     },
 
     {
@@ -117,15 +122,6 @@ return {
         "williamboman/mason-lspconfig.nvim",
         opts = {
             automatic_enable = true,
-            ensure_installed = {
-                "lua_ls",
-                "pylsp",
-                "bashls",
-                "eslint",
-                "emmet_language_server",
-                "phpactor",
-                "java_language_server",
-            },
         },
         dependencies = {
             "mason-org/mason.nvim", "neovim/nvim-lspconfig"
@@ -138,27 +134,16 @@ return {
 
     {
         "neovim/nvim-lspconfig",
+        dependencies = { "saghen/blink.cmp" },
         config = function()
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
             vim.lsp.enable("lua_ls")
-            vim.lsp.config("lua_ls", {
-                capabilities = capabilities
-            })
 
             vim.lsp.enable("pylsp")
-            vim.lsp.config("pylsp", {
-                capabilities = capabilities
-            })
 
             vim.lsp.enable("bashls")
-            vim.lsp.config("bashls", {
-                capabilities = capabilities
-            })
 
             vim.lsp.enable("eslint")
             vim.lsp.config("eslint", {
-                capabilities = capabilities,
                 filetypes = {
                     "javascript",
                     "javascriptreact",
@@ -175,7 +160,6 @@ return {
 
             vim.lsp.enable("emmet_language_server")
             vim.lsp.config("emmet_language_server", {
-                capabilities = capabilities,
                 filetypes = {
                     "css",
                     "eruby",
@@ -193,11 +177,6 @@ return {
             })
 
             vim.lsp.enable("phpactor")
-            vim.lsp.config("phpactor", {
-                capabilities = capabilities
-            })
-
-            vim.lsp.enable("jdtls")
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
@@ -247,6 +226,10 @@ return {
     },
 
     {
+        "hrsh7th/nvim-cmp"
+    },
+
+    --[[{
         "hrsh7th/nvim-cmp",
         config = function()
             local luasnip = require("luasnip")
@@ -300,7 +283,7 @@ return {
                 }),
             })
         end,
-    },
+    },--]]
 
     {
         "L3MON4D3/LuaSnip",
@@ -310,11 +293,11 @@ return {
         },
     },
 
-    {
+    --[[{
         "hrsh7th/cmp-nvim-lsp",
-    },
+    },--]]
 
-    {
+    --[[{
         "mfussenegger/nvim-dap",
         dependencies = {
             "rcarriga/nvim-dap-ui",
@@ -332,13 +315,6 @@ return {
             })
             require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
 
-            dap.configurations.cpp = {
-                type = "executable",
-                command = "/usr/bin/lldb",
-                name = "lldb",
-            }
-            dap.configurations.c = dap.configurations.cpp
-
             vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint, {})
             vim.keymap.set("n", "<Leader>dc", dap.continue, {})
 
@@ -355,7 +331,7 @@ return {
                 dapui.close()
             end
         end,
-    },
+    },]]
 
     {
         "lewis6991/gitsigns.nvim",
@@ -386,6 +362,7 @@ return {
         config = function()
             require("mini.pairs").setup()
             require("mini.surround").setup()
+            require("mini.icons").setup()
         end,
     },
 
@@ -428,4 +405,100 @@ return {
             { "<Leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
         },
     },
+
+    {
+        "onsails/lspkind.nvim"
+    },
+
+    {
+        'saghen/blink.cmp',
+        -- optional: provides snippets for the snippet source
+        dependencies = { 'rafamadriz/friendly-snippets' },
+
+        -- use a release tag to download pre-built binaries
+        version = '1.*',
+        -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+        -- build = 'cargo build --release',
+        -- If you use nix, you can build from source using latest nightly rust with:
+        -- build = 'nix run .#build-plugin',
+
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
+        opts = {
+            -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+            -- 'super-tab' for mappings similar to vscode (tab to accept)
+            -- 'enter' for enter to accept
+            -- 'none' for no mappings
+            --
+            -- All presets have the following mappings:
+            -- C-space: Open menu or open docs if already open
+            -- C-n/C-p or Up/Down: Select next/previous item
+            -- C-e: Hide menu
+            -- C-k: Toggle signature help (if signature.enabled = true)
+            --
+            -- See :h blink-cmp-config-keymap for defining your own keymap
+            keymap = { preset = 'super-tab' },
+
+            appearance = {
+                -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+                -- Adjusts spacing to ensure icons are aligned
+                nerd_font_variant = 'normal'
+            },
+
+            -- (Default) Only show the documentation popup when manually triggered
+            completion = {
+                documentation = { auto_show = false },
+                menu = {
+                    draw = {
+                        components = {
+                            kind_icon = {
+                                text = function(ctx)
+                                    local icon = ctx.kind_icon
+                                    if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                                        local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+                                        if dev_icon then
+                                            icon = dev_icon
+                                        end
+                                    else
+                                        icon = require("lspkind").symbolic(ctx.kind, {
+                                            mode = "symbol",
+                                        })
+                                    end
+
+                                    return icon .. ctx.icon_gap
+                                end,
+
+                                -- Optionally, use the highlight groups from nvim-web-devicons
+                                -- You can also add the same function for `kind.highlight` if you want to
+                                -- keep the highlight groups in sync with the icons.
+                                highlight = function(ctx)
+                                    local hl = ctx.kind_hl
+                                    if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                                        local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+                                        if dev_icon then
+                                            hl = dev_hl
+                                        end
+                                    end
+                                    return hl
+                                end,
+                            }
+                        }
+                    }
+                }
+            },
+            -- Default list of enabled providers defined so that you can extend it
+            -- elsewhere in your config, without redefining it, due to `opts_extend`
+            sources = {
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
+            },
+
+            -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+            -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+            -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+            --
+            -- See the fuzzy documentation for more information
+            fuzzy = { implementation = "prefer_rust_with_warning" }
+        },
+        opts_extend = { "sources.default" }
+    }
 }
