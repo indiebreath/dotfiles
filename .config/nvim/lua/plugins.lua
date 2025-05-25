@@ -36,6 +36,8 @@ return {
 
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "master",
+        lazy = false,
         build = ":TSUpdate",
         config = function()
             local config = require("nvim-treesitter.configs")
@@ -131,26 +133,31 @@ return {
     },
 
     {
-        "mfussenegger/nvim-jdtls",
+        "mfussenegger/nvim-jdtls"
     },
 
     {
         "neovim/nvim-lspconfig",
         config = function()
-            local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local jdtls = require("jdtls")
 
-            lspconfig.lua_ls.setup({
-                capabilities = capabilities,
+            vim.lsp.enable("lua_ls")
+            vim.lsp.config("lua_ls", {
+                capabilities = capabilities
             })
-            lspconfig.pylsp.setup({
-                capabilities = capabilities,
+
+            vim.lsp.enable("pylsp")
+            vim.lsp.config("pylsp", {
+                capabilities = capabilities
             })
-            lspconfig.bashls.setup({
-                capabilities = capabilities,
+
+            vim.lsp.enable("bashls")
+            vim.lsp.config("bashls", {
+                capabilities = capabilities
             })
-            lspconfig.eslint.setup({
+
+            vim.lsp.enable("eslint")
+            vim.lsp.config("eslint", {
                 capabilities = capabilities,
                 filetypes = {
                     "javascript",
@@ -165,7 +172,9 @@ return {
                     "ejs",
                 },
             })
-            lspconfig.emmet_language_server.setup({
+
+            vim.lsp.enable("emmet_language_server")
+            vim.lsp.config("emmet_language_server", {
                 capabilities = capabilities,
                 filetypes = {
                     "css",
@@ -182,15 +191,13 @@ return {
                     "ejs",
                 },
             })
-            lspconfig.phpactor.setup({
-                capabilities = capabilities,
+
+            vim.lsp.enable("phpactor")
+            vim.lsp.config("phpactor", {
+                capabilities = capabilities
             })
-            lspconfig.jdtls.setup({
-                capabilities = capabilities,
-                on_attach = function()
-                    vim.keymap.set("n", "<C-o>", jdtls.organize_imports, {})
-                end
-            })
+
+            vim.lsp.enable("jdtls")
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
