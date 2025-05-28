@@ -15,6 +15,8 @@ vim.keymap.set("n", "<C-l>", "<C-w><Right>", {})
 
 vim.keymap.set("n", "<C-s>", ":setlocal spell spelllang=en_au<CR>", {})
 
+vim.diagnostic.config({ virtual_text = true })
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({

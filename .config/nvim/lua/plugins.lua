@@ -134,7 +134,6 @@ return {
 
     {
         "neovim/nvim-lspconfig",
-        dependencies = { "saghen/blink.cmp" },
         config = function()
             vim.lsp.enable("lua_ls")
 
@@ -199,6 +198,7 @@ return {
 
     {
         "nvimtools/none-ls.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             local null_ls = require("null-ls")
             null_ls.setup({
@@ -226,12 +226,8 @@ return {
     },
 
     {
-        "hrsh7th/nvim-cmp"
-    },
-
-    --[[{
         "hrsh7th/nvim-cmp",
-        config = function()
+        --[[config = function()
             local luasnip = require("luasnip")
             local cmp = require("cmp")
             require("luasnip.loaders.from_vscode").lazy_load()
@@ -282,8 +278,8 @@ return {
                     { name = "buffer" },
                 }),
             })
-        end,
-    },--]]
+        end,]]
+    },
 
     {
         "L3MON4D3/LuaSnip",
@@ -295,7 +291,7 @@ return {
 
     --[[{
         "hrsh7th/cmp-nvim-lsp",
-    },--]]
+    },]]
 
     --[[{
         "mfussenegger/nvim-dap",
@@ -500,5 +496,16 @@ return {
             fuzzy = { implementation = "prefer_rust_with_warning" }
         },
         opts_extend = { "sources.default" }
+    },
+
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        ---@module "ibl"
+        ---@type ibl.config
+        opts = {},
+        config = function()
+            require("ibl").setup()
+        end,
     }
 }

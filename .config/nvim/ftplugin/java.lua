@@ -1,7 +1,9 @@
+local jdtls = require("jdtls")
+
 -- If you started neovim within `~/dev/xy/project-1` this would resolve to `project-1`
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
-local workspace_dir = '/home/indiebreath/Documents/Software/' .. project_name
+local workspace_dir = '/home/indiebreath/Documents/' .. project_name
 --                                               ^^
 --                                               string concattenation in Lua
 
@@ -35,7 +37,7 @@ local config = {
 
         -- 💀
         '-configuration',
-        "/home/indiebreath/packages/eclipse.jdt.ls-1.47.0/org.eclipse.jdt.ls.product/target/repository/config_linux",                   -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
+        "/home/indiebreath/packages/eclipse.jdt.ls-1.47.0/org.eclipse.jdt.ls.product/target/repository/config_linux", -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
         -- Must point to the                      Change to one of `linux`, `win` or `mac`
         -- eclipse.jdt.ls installation            Depending on your system.
 
@@ -58,6 +60,9 @@ local config = {
     -- for a list of options
     settings = {
         java = {
+            format = {
+                enable = false
+            }
         }
     },
 
@@ -73,8 +78,11 @@ local config = {
     },
     on_attach = function(client, bufnr)
         local opts = { silent = true, buffer = bufnr }
-    end
+
+        vim.keymap.set("n", "<Leader>lo", jdtls.organize_imports, { desc = "Organize imports", buffer = bufnr })
+    end,
 }
+
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
-require('jdtls').start_or_attach(config)
+jdtls.start_or_attach(config)
