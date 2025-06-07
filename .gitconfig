@@ -1,0 +1,9 @@
+[user]
+	name = indiebreath
+	email = indiebreath@proton.me
+[pull]
+	rebase = true
+[core]
+	editor = nvim
+[color]
+	ui = true

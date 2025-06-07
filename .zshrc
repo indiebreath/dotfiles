@@ -22,9 +22,6 @@ alias sz="source ~/.zshrc"
 alias media="cd /run/media/indiebreath"
 alias pe="EDITOR=nvim pass edit"
 
-alias reboot="umount ~/sambashare && reboot"
-alias poweroff="umount ~/sambashare && poweroff"
-
 alias nvimconfig="vim ~/.config/nvim"
 alias zshrc="vim ~/.zshrc"
 alias hyprconfig="vim ~/.config/hypr/hyprland.conf"
@@ -54,15 +51,15 @@ alias clangdev="clang -std=c99 -Wall -Werror"
 alias clangbuild="clang -std=99"
 alias pybuild="pyinstaller -F"
 
-alias notes="vim ~/Documents/Notes"
-alias schoolnotes="vim ~/Documents/School/School_Notes"
+alias notes="vim ~/Notes"
+alias schoolnotes="vim ~/School/School_Notes"
+alias appdata="cd /usr/share/applications"
 
 alias remotelogin="ssh indiebreath@100.68.21.58"
 
 alias umountvms="umount /run/media/indiebreath/VMs"
 
 eval "$(zoxide init --cmd cd zsh)"
-eval "$(thefuck --alias fk)"
 eval "$(starship init zsh)"
 
 export EDITOR=nvim
