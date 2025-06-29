@@ -20,7 +20,9 @@ zstyle ':completion:*' rehash true
 alias vim="nvim"
 alias sz="source ~/.zshrc"
 alias media="cd /run/media/indiebreath"
-alias pe="EDITOR=nvim pass edit"
+alias zip="zip -r"
+alias ll="ls -la"
+alias df="duf"
 
 alias nvimconfig="vim ~/.config/nvim"
 alias zshrc="vim ~/.zshrc"

@@ -92,7 +92,7 @@ return {
                 shade_terminals = false,
             })
 
-            vim.keymap.set("n", "<Leader>h", ":ToggleTerm <cr>")
+            vim.keymap.set("n", "<Leader>h", ":ToggleTerm<CR>")
         end,
     },
 
@@ -176,6 +176,8 @@ return {
             })
 
             vim.lsp.enable("phpactor")
+
+            vim.lsp.enable("rust_analyzser")
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
@@ -507,5 +509,24 @@ return {
         config = function()
             require("ibl").setup()
         end,
-    }
+    },
+
+    {
+        'saecki/crates.nvim',
+        tag = 'stable',
+        config = function()
+            require('crates').setup()
+        end,
+    },
+
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        build = "cd app && npm install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+            vim.g.mkdp_refresh_slow = 1
+        end,
+        ft = { "markdown" },
+    },
 }
