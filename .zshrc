@@ -23,6 +23,10 @@ alias media="cd /run/media/indiebreath"
 alias zip="zip -r"
 alias ll="ls -la"
 alias df="duf"
+alias cp="cpg -g"
+alias mv="mvg -g"
+alias usbmount="udisksctl mount -b"
+alias usbunmount="udisksctl unmount -b"
 
 alias nvimconfig="vim ~/.config/nvim"
 alias zshrc="vim ~/.zshrc"
@@ -44,11 +48,6 @@ alias yr="sudo pacman -Rs"
 alias pac="sudo pacman -S"
 alias ys="yay -S"
 
-alias db="mariadb -u root -p"
-alias apacheconf="sudo nvim /etc/httpd/conf/httpd.conf"
-alias phpconf="sudo nvim /etc/php/php.ini"
-alias mariadbconf="sudo nvim /etc/my.cnf.d"
-
 alias clangdev="clang -std=c99 -Wall -Werror"
 alias clangbuild="clang -std=99"
 alias pybuild="pyinstaller -F"
@@ -58,6 +57,7 @@ alias schoolnotes="vim ~/School/School_Notes"
 alias appdata="cd /usr/share/applications"
 
 alias remotelogin="ssh indiebreath@100.68.21.58"
+alias rmitaccess="ssh s4065282@titan.csit.rmit.edu.au"
 
 alias umountvms="umount /run/media/indiebreath/VMs"
 

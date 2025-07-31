@@ -5,6 +5,44 @@ return {
         priority = 1000,
         config = function()
             vim.cmd("colorscheme catppuccin-mocha")
+            require("catppuccin").setup({
+                integrations = {
+                    blink_cmp = {
+                        style = 'bordered',
+                    },
+                    dashboard = true,
+                    gitsigns = true,
+                    indent_blankline = {
+                        enabled = true,
+                    },
+                    markdown = true,
+                    mini = {
+                        enabled = true,
+                    },
+                    native_lsp = {
+                        enabled = true,
+                        virtual_text = {
+                            errors = { "italic" },
+                            hints = { "italic" },
+                            warnings = { "italic" },
+                            information = { "italic" },
+                            ok = { "italic" },
+                        },
+                        underlines = {
+                            errors = { "underline" },
+                            hints = { "underline" },
+                            warnings = { "underline" },
+                            information = { "underline" },
+                            ok = { "underline" },
+                        },
+                        inlay_hints = {
+                            background = true,
+                        },
+                        nvimtree = true,
+                        render_markdown = true,
+                    },
+                }
+            })
         end,
     },
 
@@ -47,7 +85,8 @@ return {
         config = function()
             local config = require("nvim-treesitter.configs")
             config.setup({
-                ensure_installed = { "lua", "python", "bash", "html", "javascript", "php", "markdown", "java" },
+                ensure_installed = { "lua", "python", "html", "css", "tsx", "vue", "javascript", "php", "markdown", "java", "rust" },
+                auto_install = true,
                 highlight = { enable = true },
                 indent = { enable = true },
             })
@@ -141,22 +180,6 @@ return {
 
             vim.lsp.enable("bashls")
 
-            vim.lsp.enable("eslint")
-            vim.lsp.config("eslint", {
-                filetypes = {
-                    "javascript",
-                    "javascriptreact",
-                    "javascript.jsx",
-                    "typescript",
-                    "typescriptreact",
-                    "typescript.tsx",
-                    "vue",
-                    "svelte",
-                    "astro",
-                    "ejs",
-                },
-            })
-
             vim.lsp.enable("emmet_language_server")
             vim.lsp.config("emmet_language_server", {
                 filetypes = {
@@ -171,6 +194,23 @@ return {
                     "scss",
                     "typescriptreact",
                     "htmlangular",
+                    "ejs",
+                    "vue",
+                },
+            })
+
+            vim.lsp.enable("eslint")
+            vim.lsp.config("eslint", {
+                filetypes = {
+                    "javascript",
+                    "javascriptreact",
+                    "javascript.jsx",
+                    "typescript",
+                    "typescriptreact",
+                    "typescript.tsx",
+                    "vue",
+                    "svelte",
+                    "astro",
                     "ejs",
                 },
             })
@@ -214,7 +254,7 @@ return {
                     null_ls.builtins.diagnostics.checkstyle.with({
                         extra_args = { "-c", "/google_checks.xml" },
                     }),
-                    null_ls.builtins.diagnostics.semgrep,
+                    --null_ls.builtins.diagnostics.semgrep,
                     null_ls.builtins.formatting.shfmt,
                     null_ls.builtins.formatting.black,
                     null_ls.builtins.formatting.isort,
@@ -529,4 +569,16 @@ return {
         end,
         ft = { "markdown" },
     },
+
+    {
+        "luckasRanarison/tailwind-tools.nvim",
+        name = "tailwind-tools",
+        build = ":UpdateRemotePlugins",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-telescope/telescope.nvim", -- optional
+            "neovim/nvim-lspconfig", -- optional
+        },
+        opts = {}                    -- your configuration
+    }
 }
